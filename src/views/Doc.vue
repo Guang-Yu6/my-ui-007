@@ -1,23 +1,45 @@
 <template>
   <div>
-    <topnav/>
-    <div class="top-nav">
-      <div class="logo"></div>
-      <div class="menu"></div>
-    </div>
-
+    <Topnav/>
     <div class="content">
-      <aside>边栏</aside>
-      <main>主要内容</main>
+      <aside v-if="menuVisible">
+        <h2>组件列表</h2>
+        <ol>
+          <li>
+            <router-link to="/doc/switch">Switch 组件</router-link>
+          </li>
+
+          <li>
+            <router-link to="/doc/button">Button 组件</router-link>
+          </li>
+
+          <li>
+            <router-link to="/doc/dialog">Dialog 组件</router-link>
+          </li>
+
+          <li>
+            <router-link to="/doc/tabs">Tabs 组件</router-link>
+          </li>
+        </ol>
+      </aside>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Topnav from "../components/Topnav.vue";
+import {inject, Ref} from "vue";
+
+
 export default {
-  components: {Topnav}
+  components: {Topnav},
+  setup(){
+    const menuVisible = inject<Ref<boolean>>('xxx123')
+    console.log('Doc页面 + ' + menuVisible.value)
+    return {menuVisible}
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>
